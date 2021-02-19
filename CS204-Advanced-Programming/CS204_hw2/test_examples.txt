@@ -1,0 +1,65 @@
+----- PATH FINDER CASES ---
+Test Case 1
+input: 
+hop: 2
+Please enter your option
+4
+Where are you now?
+Heiwadai
+Where do you want to go?
+Kodemmacho
+
+--
+Test Case 2
+hop: 6
+Please enter your option
+4
+Where are you now?
+Meguro
+Where do you want to go?
+Ikebukuro
+
+--
+Test Case 3 
+hop: 6
+Please enter your option
+4
+Where are you now?
+Suitengumae
+Where do you want to go?
+Wakoshi
+
+---------------------------
+
+------ ADD CASES 
+Test Case 4
+Add a stop to a line twice.
+--
+Test Case 5
+Add a stop to a line's head. 
+--
+Test Case 6
+Add a stop to a line's tail. 
+--
+Test Case 7
+Use wrong name for existing stop. 
+
+Test Case 8
+Add a middle stop to a line. 
+
+--------------------------
+
+----- DELETE CASES -------
+Test Case 9 
+Delete head stop of a line twice.
+
+Test Case 10 
+Delete all stops from Mb and check if line still exists. 
+
+Test Case 11 
+Delete a middle stop from a line. 
+
+Test Case 12 
+Use wrong name for existing stop.
+--------------------------
+
