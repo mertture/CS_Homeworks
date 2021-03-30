@@ -1,0 +1,34 @@
+%{
+#include "mertture-hw2.tab.h" 
+%}
+%%
+
+['][^']*[']	return tSTRING;
+
+
+["]Get["]	return tGET;
+["]Set["]	return tSET;
+["]Function["]	return tFUNCTION;
+["]Print["]	return tPRINT;
+["]If["]	return tIF;
+["]Return["]	return tRETURN;
+
+["]"++"["]		return tINC;
+["]"--"["]		return tDEC;
+["]">"["]		return tGT;
+["]"=="["]		return tEQUALITY;
+["]"<"["]		return tLT;
+["]"<="["]		return tLEQ;
+["]">="["]		return tGEQ;
+
+["][_a-zA-Z][a-zA-Z0-9_]*["]	return tIDENT;
+				
+[0-9]+ |
+-[0-9]+ |		
+[0-9]+"."[0-9]+	|
+-[0-9]+"."[0-9]+	return tNUM; 
+	
+[ \t\n]+ 
+.			return yytext[0];
+
+%%
