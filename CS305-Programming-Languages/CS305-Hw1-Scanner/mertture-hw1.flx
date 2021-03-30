@@ -1,0 +1,144 @@
+
+  int LineNo = 1;
+  char * ConvertIntLexeme(char number[])
+  {
+	 char * num = (char*)malloc(4);
+	 int i = 0;
+	 int zeroC = 0;
+	 for (i; i < strlen(number); i++) {
+	 	if(number[i] == '0') {
+			zeroC++;
+		}
+	 }
+	 if ((strlen(number) == zeroC+1) && number[0] == '-') {
+		return "-0";
+	} 
+	 int numberint = atoi(number);
+	 sprintf(num,"%d",numberint);
+	 return num;
+  } 
+
+
+
+  char * ConvertFloatLexeme(char number[])
+  {
+	 char * num = (char*)malloc(4);
+	 char * num1 = (char*)malloc(4);
+	 char * num2 = (char*)malloc(4);
+	 int i;
+
+	 for (i = 0; i < strlen(number); i++)
+	 {
+		 if (number[i] == '.')
+		 {
+			 memcpy(num1,number,i);
+			 num1[i] = '\0';
+			 num1 = ConvertIntLexeme(num1);
+			 if (num1[0] == '0' && number[0] == '-')
+			 {
+				num1[0] = '-';
+				num1[1] = '0';
+				num1[2] = '\0';
+			 }
+			 memcpy(num2,number+i+1,strlen(number)-i-1);
+			 num2[strlen(number)-i-1] = '\0';
+			 int j;
+
+
+			 int k;
+			 for (k = strlen(num2) - 1; k >= 0; k--)
+			 {
+				if (num2[k] == '0')
+				{
+					num2[k] = '\0';
+				}
+				else
+				{
+					break;
+				}
+			 }
+		 }
+	 }
+	 sprintf(num,"%s", num1);
+	 sprintf(num+strlen(num),"%c", '.');
+	 if (strlen(num2) == 0)
+	 {
+		 num2[0] = '0';
+	 } 
+	 sprintf(num+strlen(num), "%s", num2);
+	 return num;
+   }
+ 
+
+
+  int counter = 0;
+  int inStr = 0; 
+  char value[200];
+%%
+"\'"  inStr++;
+"\"" counter++;
+""
+\
+" "
+"\t" 
+"."
+"\"If\"" printf("%d tIF\n", LineNo);
+"\"Function\"" printf("%d tFUNCTION\n", LineNo);
+"\"Set\""	   printf("%d tSET\n", LineNo);
+"\"Print\""	   printf("%d tPRINT\n", LineNo);
+"\"Get\"" 	   printf("%d tGET\n", LineNo);
+"\"Return\""      printf("%d tRETURN\n", LineNo);
+"\"For\""      printf("%d tFOR\n", LineNo);
+\n LineNo++;
+"," printf("%d tCOMMA\n", LineNo);
+"\"-\"" printf("%d tMINUS\n", LineNo);
+"\"+\"" printf("%d tPLUS\n", LineNo);
+"\"/\"" printf("%d tDIV\n", LineNo);
+"\"*\"" printf("%d tMUL\n", LineNo);
+"\"++\"" printf("%d tINC\n", LineNo);
+"\"--\"" printf("%d tDEC\n", LineNo); 
+"\"==\"" printf("%d tEQUALITY\n", LineNo);
+"\"<\"" printf("%d tLT\n", LineNo);
+"\"<=\"" printf("%d tLEQ\n", LineNo);
+"\">\"" printf("%d tGT\n", LineNo);
+"\">=\"" printf("%d tGEQ\n", LineNo);
+"[" printf("%d tLBRAC\n", LineNo);
+"]" printf("%d tRBRAC\n", LineNo);
+ 
+-?[0-9]+\.[0-9]+ counter = 0;  printf("%d tNUM (%s) (%s)\n", LineNo, yytext, ConvertFloatLexeme(yytext));
+-?[0-9]+  counter = 0; printf("%d tNUM (%s) (%s)\n", LineNo, yytext, ConvertIntLexeme(yytext));
+
+\'[^']*\'   {
+	inStr = 0;
+	int i = 0;
+	int lCount = 0;
+	  for (i = 0; i < (strlen(yytext)-1); i++) {
+                if ((yytext[i] == 10)) lCount++;
+        }  
+       	yytext[strlen(yytext)-1] = '\0';  
+	printf("%d tSTRING (%s)\n", LineNo, yytext+1);
+	        LineNo += lCount;
+	    }
+      
+\"[a-zA-Z_][a-zA-Z0-9_]*\" yytext[strlen(yytext)-1] = '\0';  printf("%d tIDENT (%s)\n", LineNo, yytext+1);
+		
+[a-zA-Z_]
+
+"+"
+"-"
+"*"
+"/"
+"++"
+"--"
+">"
+"<"
+">="
+"<="
+"=="
+
+%%
+
+int main() {
+	yylex();
+	return(0);
+}

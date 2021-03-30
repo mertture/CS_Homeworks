@@ -1,0 +1,25 @@
+1 tLBRAC
+1 tPLUS
+1 tCOMMA
+1 tNUM (1) (1)
+1 tCOMMA
+1 tNUM (2) (2)
+1 tRBRAC
+2 tLBRAC
+2 tMINUS
+2 tCOMMA
+2 tNUM (1) (1)
+2 tCOMMA
+2 tNUM (2) (2)
+2 tRBRAC
+3 tLBRAC
+3 tINC
+3 tCOMMA
+3 tIDENT (VariableName)
+3 tRBRAC
+4 tNUM (-00.01) (-0.01)
+5 tNUM (0.0) (0.0)
+6 tNUM (-1.01) (-1.01)
+7 tNUM (-00) (-0)
+8 tNUM (-000) (-0)
+9 tNUM (-00.00) (-0.0)
