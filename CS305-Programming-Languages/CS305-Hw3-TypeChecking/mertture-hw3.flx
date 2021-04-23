@@ -1,0 +1,49 @@
+%{
+#include "mertture-hw3.h"
+#include "mertture-hw3.tab.h" 
+int line = 1;
+%}
+
+%%
+
+\n line++;
+
+
+['][^']*[']		{/*yylval.stvalue = yytext; return tSTRING;*/
+			
+			yytext[yyleng-1]='\0';
+			yylval.stvalue = strdup(yytext+1);
+			return tSTRING;
+			}
+["]Get["]		return tGET;
+["]Set["]		return tSET;
+["]Function["]		return tFUNCTION;
+["]Print["]		return tPRINT;
+["]If["]		return tIF;
+["]Return["]		return tRETURN;
+
+["]"+"["]               {yylval.value = line; return tADD;}
+["]"-"["]               {yylval.value = line; return tSUB;}
+["]"*"["]               {yylval.value = line; return tMUL;}
+["]"/"["]               {yylval.value = line; return tDIV;}
+["]"++"["]		return tINC;
+["]">"["]		return tGT;
+["]"=="["]		return tEQUALITY;
+["]"--"["]		return tDEC;
+["]"<"["]		return tLT;
+["]"<="["]		return tLEQ;
+["]">="["]		return tGEQ;
+
+
+["][_a-zA-Z][a-zA-Z0-9_]*["]	return tIDENT;
+				
+[0-9]+ |
+-[0-9]+  {yylval.ivalue = atoi(yytext); return tNUM;}
+
+[0-9]+"."[0-9]+	|
+-[0-9]+"."[0-9]+	{yylval.value = atof(yytext); return tFLOAT;}
+
+[ \t]+ 
+
+.	return yytext[0];
+%%
