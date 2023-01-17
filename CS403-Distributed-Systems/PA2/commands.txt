@@ -1,0 +1,4 @@
+python3 -m Pyro4.naming
+python3 -m BTCServer.py
+python3 -m ETHServer.py
+python3 -m secondClient
