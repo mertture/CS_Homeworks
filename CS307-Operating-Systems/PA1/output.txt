@@ -1,0 +1,5 @@
+     --vv          Be verbose when deleting files, showing them as they are
+                 removed.
+--
+     ing a large variety of errors.  The --vv option is non-standard and its use
+     in scripts is not recommended.

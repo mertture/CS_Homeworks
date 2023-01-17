@@ -1,0 +1,1 @@
+man rm | grep -w -A 1 "\-v" > output.txt
